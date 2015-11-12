@@ -10,7 +10,14 @@ $ npm install --save-dev sinon-mongoose
 ## Usage
 
 ```js
+require('sinon');
 require('sinon-mongoose');
+
+sinon.mockModel(YourModel)
+  .expects('find')
+  .chain('limit').withArgs(10)
+  .chain('sort').withArgs('-date')
+  .chain('exec');
 ```
 ## License
 
