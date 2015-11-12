@@ -4,19 +4,17 @@
 ## Installation
 
 ```sh
-$ npm install --save sinon-mongoose
+$ npm install --save-dev sinon-mongoose
 ```
 
 ## Usage
 
 ```js
-var sinonMongoose = require('sinon-mongoose');
-
-sinonMongoose('Rainbow');
+require('sinon-mongoose');
 ```
 ## License
 
-MIT © [Gon]()
+MIT © [Gonzalo Aguirre]()
 
 
 [npm-image]: https://badge.fury.io/js/sinon-mongoose.svg
