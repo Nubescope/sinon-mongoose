@@ -12,13 +12,35 @@ $ npm install --save-dev sinon-mongoose
 ```js
 require('sinon');
 require('sinon-mongoose');
+```
 
-sinon.mockModel(YourModel)
+First, we recommend to also use `sinon-as-promised` npm to have `resolves` and `rejects` methods on stubs.
+The following examples require it.
+
+### Mock Model
+
+Suppose we want to test this
+
+```js
+MongooseModel.find()
+  .limit(10)
+  .sort('-date')
+  .exec()
+  .then(function(result) {
+    console.log(result);
+  });
+```
+Just use `mockModel` instead of `mock`, expects the method as always and use `chain` to expects the chained methods
+
+```js
+sinon.mockModel(MongooseModel)
   .expects('find')
   .chain('limit').withArgs(10)
   .chain('sort').withArgs('-date')
-  .chain('exec');
+  .chain('exec')
+  .resolves('SOME_VALUE');
 ```
+
 ## License
 
 MIT © [Gonzalo Aguirre]()
