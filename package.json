@@ -17,8 +17,13 @@
     "mongoose",
     "mock",
     "stub",
+    "expects",
     "test",
-    "unit"
+    "unit",
+    "query",
+    "static",
+    "promise",
+    "method"
   ],
   "repository": "gaguirre/sinon-mongoose",
   "devDependencies": {

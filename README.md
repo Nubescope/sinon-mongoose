@@ -1,10 +1,10 @@
 # sinon-mongoose [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url] [![Coverage percentage][coveralls-image]][coveralls-url]
-> Sinon extensions for Mongoose stubs
+> Extend [Sinon][sinon-url] stubs for [Mongoose][mongoose-url] methods to test chained methods easily
 
 ## Installation
 
 ```sh
-$ npm install --save-dev sinon-mongoose
+$ npm install sinon-mongoose
 ```
 
 ## Usage
@@ -13,14 +13,11 @@ $ npm install --save-dev sinon-mongoose
 require('sinon');
 require('sinon-mongoose');
 ```
+### With Promises
 
-First, we recommend to also use `sinon-as-promised` npm to have `resolves` and `rejects` methods on stubs.
-The following examples require it.
+First of all, if you are using Promises we recommend to use [sinon-as-promised][sinon-as-promised-url] npm to have `resolves` and `rejects` methods on stubs.
 
-### Mock Model
-
-Suppose we want to test this
-
+If you want to test this
 ```js
 MongooseModel.find()
   .limit(10)
@@ -30,10 +27,11 @@ MongooseModel.find()
     console.log(result);
   });
 ```
-Just use `mockModel` instead of `mock`, expects the method as always and use `chain` to expects the chained methods
+Just `mock` and `expects` as usual and use `chain` to expects the chained methods.
+Finally call `resolves` or `rejects` (remember to require [sinon-as-promised][sinon-as-promised-url]).
 
 ```js
-sinon.mockModel(MongooseModel)
+sinon.mock(MongooseModel)
   .expects('find')
   .chain('limit').withArgs(10)
   .chain('sort').withArgs('-date')
@@ -41,6 +39,32 @@ sinon.mockModel(MongooseModel)
   .resolves('SOME_VALUE');
 ```
 
+See complete [example][promises-example-url]
+
+### With callbacks (no Promises)
+
+If you want to test this
+```js
+MongooseModel.find()
+  .limit(10)
+  .sort('-date')
+  .exec(function(err, result) {
+    console.log(result);
+  });
+```
+Just `mock` and `expects` as usually and use `chain` to expects the chained methods.
+Finally `yields` as always.
+
+```js
+sinon.mock(MongooseModel)
+  .expects('find')
+  .chain('limit').withArgs(10)
+  .chain('sort').withArgs('-date')
+  .chain('exec')
+  .yields(null, 'SOME_VALUE');
+```
+
+See complete [example][callbacks-example-url]
 ## License
 
 MIT © [Gonzalo Aguirre]()
@@ -54,3 +78,8 @@ MIT © [Gonzalo Aguirre]()
 [daviddm-url]: https://david-dm.org/gaguirre/sinon-mongoose
 [coveralls-image]: https://coveralls.io/repos/gaguirre/sinon-mongoose/badge.svg
 [coveralls-url]: https://coveralls.io/r/gaguirre/sinon-mongoose
+[sinon-url]: https://github.com/cjohansen/sinon.js
+[mongoose-url]: https://github.com/Automattic/mongoose
+[sinon-as-promised-url]: https://github.com/bendrucker/sinon-as-promised
+[promises-example-url]: https://github.com/gaguirre/sinon-mongoose/tree/master/examples/promises
+[callbacks-example-url]: https://github.com/gaguirre/sinon-mongoose/tree/master/examples/callbacks
