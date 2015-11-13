@@ -1,0 +1,12 @@
+{
+  "name": "sinon-mongoose-promises-example",
+  "scripts": {
+    "test": "mocha"
+  },
+  "devDependencies": {
+    "mocha": "^2.0.1",
+    "sinon": "^1.12.1",
+    "mongoose": "^4.2.5",
+    "sinon-mongoose": "^1.2.0"
+  }
+}
