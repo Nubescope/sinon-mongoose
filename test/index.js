@@ -32,6 +32,46 @@ describe('sinon-mongoose', function () {
           done();
         });
     });
+
+    it('#lean', function (done) {
+      var BookMock = sinon.mock(Book);
+
+      BookMock
+        .expects('find').withArgs('SOME_ARGUMENTS')
+        .chain('lean')
+        .chain('exec')
+        .resolves('RESULT');
+
+      Book.find('SOME_ARGUMENTS')
+        .lean()
+        .exec()
+        .then(function (result) {
+          BookMock.verify();
+          BookMock.restore();
+          assert.equal(result, 'RESULT');
+          done();
+        });
+    });
+
+    it('#count', function (done) {
+      var BookMock = sinon.mock(Book);
+
+      BookMock
+        .expects('find').withArgs('SOME_ARGUMENTS')
+        .chain('count')
+        .chain('exec')
+        .resolves('RESULT');
+
+      Book.find('SOME_ARGUMENTS')
+        .count()
+        .exec()
+        .then(function (result) {
+          BookMock.verify();
+          BookMock.restore();
+          assert.equal(result, 'RESULT');
+          done();
+        });
+    });
   });
 
   describe('should made Mongoose document methods chainables', function () {
