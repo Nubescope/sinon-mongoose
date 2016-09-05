@@ -72,6 +72,24 @@ describe('sinon-mongoose', function () {
           done();
         });
     });
+
+    it('#aggregate', function (done) {
+      var BookMock = sinon.mock(Book);
+
+      BookMock
+        .expects('aggregate')
+        .chain('lookup')
+        .resolves('RESULT');
+
+      Book.aggregate()
+        .lookup()
+        .then(function (result) {
+          BookMock.verify();
+          BookMock.restore();
+          assert.equal(result, 'RESULT');
+          done();
+        });
+    });
   });
 
   describe('should made Mongoose document methods chainables', function () {
