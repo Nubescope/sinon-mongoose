@@ -40,11 +40,10 @@
     "gulp-plumber": "^1.0.0",
     "isparta": "^3.0.3",
     "mongoose": "^4.2.5",
-    "sinon": "1",
-    "sinon-as-promised": "^4.0.0"
+    "sinon": "^2.1.0"
   },
   "peerDependencies": {
-    "sinon": "1"
+    "sinon": "^2.1.0"
   },
   "scripts": {
     "prepublish": "gulp prepublish",
