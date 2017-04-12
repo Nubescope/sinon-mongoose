@@ -1,7 +1,6 @@
 var assert = require('assert');
 var sinon = require('sinon');
 var mongoose = require('mongoose');
-require('sinon-as-promised');
 
 require('../lib');
 
