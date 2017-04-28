@@ -107,5 +107,13 @@ describe('sinon-mongoose', function() {
         assert.equal(result, 'RESULT');
       });
     });
+
+    it('Model should be restored properly', function () {
+      var bookMock = sandbox.mock(Book);
+      bookMock.expects("findOne").never();
+      sandbox.restore();
+      var anotherBookMock = sandbox.mock(Book);
+      anotherBookMock.expects("findOne").never();
+    });
   });
 });
