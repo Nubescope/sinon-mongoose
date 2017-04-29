@@ -15,7 +15,7 @@ require('sinon-mongoose');
 ```
 ### With Promises
 
-First of all, if you are using Promises we recommend to use [sinon-as-promised][sinon-as-promised-url] npm to have `resolves` and `rejects` methods on stubs.
+> If you are using a version < 2 of `sinon-mongoose` we recommend you to use [sinon-as-promised][sinon-as-promised-url] to have `resolves` and `rejects` methods on stubs.
 
 If you want to test this
 ```js
@@ -65,6 +65,10 @@ sinon.mock(MongooseModel)
 ```
 
 See complete [example][callbacks-example-url]
+
+## Contributors
+[@jniemin](https://github.com/jniemin)
+
 ## License
 
 MIT © [Gonzalo Aguirre]()
