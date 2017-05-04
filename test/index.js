@@ -1,7 +1,7 @@
 var assert = require('assert');
 var sinon = require('sinon');
 var mongoose = require('mongoose');
-
+mongoose.Promise = global.Promise;
 require('../lib');
 
 describe('sinon-mongoose', function() {
@@ -78,6 +78,28 @@ describe('sinon-mongoose', function() {
         done();
       });
     });
+
+    it('#verify chained', function(done) {
+      var bookMock = sinon.mock(new Book({ title: 'Rayuela' }));
+
+      bookMock.expects('update')
+        .chain('sort')
+        .chain('exec').resolves("RESULT");
+
+      bookMock.object.update('SOME_ARGUMENTS').exec().then(function(result) {
+        try{
+          bookMock.verify();
+          bookMock.restore();
+          done(new Error("should fail to bookMock.verify()"));
+        }catch(err){
+          bookMock.restore();
+          assert.equal(err.message, "Expected sort([...]) once (never called)");
+          done()
+        }
+      });
+    });
+
+
   });
 
   describe('using sinon sandbox', function() {
@@ -115,5 +137,56 @@ describe('sinon-mongoose', function() {
       var anotherBookMock = sandbox.mock(Book);
       anotherBookMock.expects('findOne').never();
     });
+
+    it('Verify chained - expectation.never()', function(done) {
+      var bookMock = sandbox.mock(new Book({ title: 'Rayuela' }));
+
+      bookMock.expects('update')
+        .chain('sort').never()
+        .chain('limit')
+        .chain('exec').resolves("RESULT");
+
+      bookMock.object.update('SOME_ARGUMENTS').exec().then(function(result) {
+        try{
+          bookMock.verify();
+          sandbox.restore();
+          done(new Error("should fail to bookMock.verify()"));
+        }catch(err){
+          sandbox.restore();
+          try{
+            assert.equal(err.message, "Expected limit([...]) once (never called)");
+            done()
+          }catch(err){
+            done(err)
+          }
+        }
+      });
+    });
+
+    it('Verify chained - expectation withArgs()', function(done) {
+      var bookMock = sandbox.mock(new Book({ title: 'Rayuela' }));
+
+      bookMock.expects('update')
+        .chain('sort').withArgs({field:"asc"})
+        .chain('limit')
+        .chain('exec').resolves("RESULT");
+
+      bookMock.object.update('SOME_ARGUMENTS').sort({field:"asc"}).exec().then(function(result) {
+        try{
+          bookMock.verify();
+          sandbox.restore();
+          done(new Error("should fail to bookMock.verify()"));
+        }catch(err){
+          sandbox.restore();
+          try{
+            assert.equal(err.message, "Expected limit([...]) once (never called)");
+            done()
+          }catch(err){
+            done(err)
+          }
+        }
+      });
+    });
+
   });
 });
