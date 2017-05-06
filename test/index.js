@@ -84,17 +84,17 @@ describe('sinon-mongoose', function() {
 
       bookMock.expects('update')
         .chain('sort')
-        .chain('exec').resolves("RESULT");
+        .chain('exec').resolves('RESULT');
 
-      bookMock.object.update('SOME_ARGUMENTS').exec().then(function(result) {
-        try{
+      bookMock.object.update('SOME_ARGUMENTS').exec().then(function(result) {// eslint-disable-line
+        try {
           bookMock.verify();
           bookMock.restore();
-          done(new Error("should fail to bookMock.verify()"));
-        }catch(err){
+          done(new Error('should fail to bookMock.verify()'));
+        }catch (err){
           bookMock.restore();
-          assert.equal(err.message, "Expected sort([...]) once (never called)");
-          done()
+          assert.equal(err.message, 'Expected sort([...]) once (never called)');
+          done();
         }
       });
     });
@@ -144,20 +144,20 @@ describe('sinon-mongoose', function() {
       bookMock.expects('update')
         .chain('sort').never()
         .chain('limit')
-        .chain('exec').resolves("RESULT");
+        .chain('exec').resolves('RESULT');
 
-      bookMock.object.update('SOME_ARGUMENTS').exec().then(function(result) {
-        try{
+      bookMock.object.update('SOME_ARGUMENTS').exec().then(function(result) {  // eslint-disable-line
+        try {
           bookMock.verify();
           sandbox.restore();
-          done(new Error("should fail to bookMock.verify()"));
-        }catch(err){
+          done(new Error('should fail to bookMock.verify()'));
+        }catch (err){
           sandbox.restore();
-          try{
-            assert.equal(err.message, "Expected limit([...]) once (never called)");
-            done()
-          }catch(err){
-            done(err)
+          try {
+            assert.equal(err.message, 'Expected limit([...]) once (never called)');
+            done();
+          }catch (error){
+            done(error);
           }
         }
       });
@@ -167,22 +167,22 @@ describe('sinon-mongoose', function() {
       var bookMock = sandbox.mock(new Book({ title: 'Rayuela' }));
 
       bookMock.expects('update')
-        .chain('sort').withArgs({field:"asc"})
+        .chain('sort').withArgs({field: 'asc'})
         .chain('limit')
-        .chain('exec').resolves("RESULT");
+        .chain('exec').resolves('RESULT');
 
-      bookMock.object.update('SOME_ARGUMENTS').sort({field:"asc"}).exec().then(function(result) {
-        try{
+      bookMock.object.update('SOME_ARGUMENTS').sort({field: 'asc'}).exec().then(function(result) { // eslint-disable-line
+        try {
           bookMock.verify();
           sandbox.restore();
-          done(new Error("should fail to bookMock.verify()"));
-        }catch(err){
+          done(new Error('should fail to bookMock.verify()'));
+        }catch (err){
           sandbox.restore();
-          try{
-            assert.equal(err.message, "Expected limit([...]) once (never called)");
-            done()
-          }catch(err){
-            done(err)
+          try {
+            assert.equal(err.message, 'Expected limit([...]) once (never called)');
+            done();
+          }catch (error){
+            done(error);
           }
         }
       });
