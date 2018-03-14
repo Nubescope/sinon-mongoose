@@ -1,6 +1,6 @@
 {
   "name": "sinon-mongoose",
-  "version": "2.0.2",
+  "version": "2.1.0",
   "description": "Sinon extensions for Mongoose stubs",
   "homepage": "",
   "author": {
@@ -28,25 +28,25 @@
   "repository": "underscopeio/sinon-mongoose",
   "devDependencies": {
     "babel-core": "^5.5.0",
-    "del": "^2.0.2",
-    "gulp": "^3.6.0",
-    "gulp-babel": "^5.1.0",
-    "gulp-coveralls": "^0.1.0",
-    "gulp-eslint": "^1.0.0",
-    "gulp-exclude-gitignore": "^1.0.0",
-    "gulp-istanbul": "^0.9.0",
-    "gulp-mocha": "^2.0.0",
-    "gulp-nsp": "^2.1.0",
-    "gulp-plumber": "^1.0.0",
-    "isparta": "^3.0.3",
+    "del": "^3.0.0",
+    "gulp": "^3.9.1",
+    "gulp-babel": "^6.1.2",
+    "gulp-coveralls": "^0.1.4",
+    "gulp-eslint": "^1.1.1",
+    "gulp-exclude-gitignore": "^1.2.0",
+    "gulp-istanbul": "^1.1.3",
+    "gulp-mocha": "^5.0.0",
+    "gulp-nsp": "^3.0.1",
+    "gulp-plumber": "^1.2.0",
+    "isparta": "^4.0.0",
     "mongoose": "^4.2.5",
-    "sinon": "^2.1.0"
+    "sinon": "2.1 - 4"
   },
   "peerDependencies": {
-    "sinon": "^2.1.0"
+    "sinon": "2.1 - 4"
   },
   "scripts": {
-    "prepublish": "gulp prepublish",
+    "prepublishOnly": "gulp prepublishOnly",
     "test": "gulp"
   },
   "license": "MIT"
