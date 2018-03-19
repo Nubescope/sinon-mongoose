@@ -68,6 +68,7 @@ See complete [example][callbacks-example-url]
 
 ## Contributors
 [@jniemin](https://github.com/jniemin)
+[@joebowbeer](https://github.com/joebowbeer)
 
 ## License
 
