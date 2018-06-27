@@ -1607,13 +1607,6 @@ gulp-mocha@^5.0.0:
     plugin-error "^0.1.2"
     through2 "^2.0.3"
 
-gulp-nsp@^3.0.1:
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/gulp-nsp/-/gulp-nsp-3.0.1.tgz#9068bd8292dfe99662f8f1e99a347b52b7a1610e"
-  dependencies:
-    fancy-log "^1.3.2"
-    nsp "^3.2.1"
-    plugin-error "^1.0.1"
 
 gulp-plumber@^1.2.0:
   version "1.2.0"
@@ -2776,19 +2769,6 @@ npm-run-path@^2.0.0, npm-run-path@^2.0.2:
   dependencies:
     path-key "^2.0.0"
 
-nsp@^3.2.1:
-  version "3.2.1"
-  resolved "https://registry.yarnpkg.com/nsp/-/nsp-3.2.1.tgz#0f540f8e85851e4ad370b14d5001098046dedfd1"
-  dependencies:
-    chalk "^2.1.0"
-    cli-table2 "^0.2.0"
-    cvss "^1.0.2"
-    https-proxy-agent "^2.1.0"
-    inquirer "^3.3.0"
-    nodesecurity-npm-utils "^6.0.0"
-    semver "^5.4.1"
-    wreck "^12.5.1"
-    yargs "^9.0.1"
 
 number-is-nan@^1.0.0:
   version "1.0.1"
