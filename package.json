@@ -30,7 +30,7 @@
     "babel-core": "^6.26.3",
     "del": "^3.0.0",
     "eslint-config-prettier": "^2.9.0",
-    "gulp": "^3.9.1",
+    "gulp": "^4.0.0",
     "gulp-babel": "^7.0.1",
     "gulp-coveralls": "^0.1.4",
     "gulp-eslint": "^4.0.2",
