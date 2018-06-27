@@ -67,8 +67,9 @@ sinon.mock(MongooseModel)
 See complete [example][callbacks-example-url]
 
 ## Contributors
-[@jniemin](https://github.com/jniemin)
-[@joebowbeer](https://github.com/joebowbeer)
+[@jniemin](https://github.com/jniemin)  
+[@joebowbeer](https://github.com/joebowbeer)  
+[@YasharF](https://github.com/YasharF)  
 
 ## License
 
