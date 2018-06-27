@@ -37,7 +37,6 @@
     "gulp-exclude-gitignore": "^1.2.0",
     "gulp-istanbul": "^1.1.3",
     "gulp-mocha": "^5.0.0",
-    "gulp-nsp": "^3.0.1",
     "gulp-plumber": "^1.2.0",
     "husky": "^0.14.3",
     "isparta": "^4.0.0",
