@@ -1,6 +1,15 @@
 language: node_js
 node_js:
-  - v5
-  - v4
-  - '0.12'
-  - '0.10'
+  - v10
+  - v9
+  - v8
+  - v7
+  - v6
+cache:  
+  directories:
+    - "node_modules"
+sudo: false
+install:
+  - npm install
+script:
+  - npm test
