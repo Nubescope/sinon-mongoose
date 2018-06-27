@@ -15,7 +15,7 @@ var isparta = require('isparta')
 // when they're loaded
 require('babel-core/register')
 
-gulp.task('static', function() {
+gulp.task('static', function staticTask() {
   return gulp
     .src('**/*.js')
     .pipe(excludeGitignore())
@@ -24,8 +24,7 @@ gulp.task('static', function() {
     .pipe(eslint.failAfterError())
 })
 
-
-gulp.task('pre-test', function() {
+gulp.task('pre-test', function pretestTask() {
   return gulp
     .src('lib/**/*.js')
     .pipe(
@@ -37,40 +36,51 @@ gulp.task('pre-test', function() {
     .pipe(istanbul.hookRequire())
 })
 
-gulp.task('test', ['pre-test'], function(cb) {
-  var mochaErr
+gulp.task(
+  'test',
+  gulp.series('pre-test', function testTask(cb) {
+    var mochaErr
 
-  gulp
-    .src('test/**/*.js')
-    .pipe(plumber())
-    .pipe(mocha({ reporter: 'spec' }))
-    .on('error', function(err) {
-      mochaErr = err
-    })
-    .pipe(istanbul.writeReports())
-    .on('end', function() {
-      cb(mochaErr)
-    })
-})
+    gulp
+      .src('test/**/*.js')
+      .pipe(plumber())
+      .pipe(mocha({ reporter: 'spec' }))
+      .on('error', function(err) {
+        mochaErr = err
+      })
+      .pipe(istanbul.writeReports())
+      .on('end', function() {
+        cb(mochaErr)
+      })
+  })
+)
 
-gulp.task('coveralls', ['test'], function() {
-  if (!process.env.CI) {
-    return
-  }
+gulp.task(
+  'coveralls',
+  gulp.series('test', function coverallsTask() {
+    if (!process.env.CI) {
+      return Promise.resolve()
+    }
 
-  return gulp.src(path.join(__dirname, 'coverage/lcov.info')).pipe(coveralls())
-})
-
-gulp.task('babel', ['clean'], function() {
-  return gulp
-    .src('lib/**/*.js')
-    .pipe(babel())
-    .pipe(gulp.dest('dist'))
-})
+    return gulp
+      .src(path.join(__dirname, 'coverage/lcov.info'))
+      .pipe(coveralls())
+  })
+)
 
 gulp.task('clean', function() {
   return del('dist')
 })
 
-gulp.task('prepublishOnly', ['babel'])
-gulp.task('default', ['static', 'test', 'coveralls'])
+gulp.task(
+  'babel',
+  gulp.series('clean', function babelTask() {
+    return gulp
+      .src('lib/**/*.js')
+      .pipe(babel())
+      .pipe(gulp.dest('dist'))
+  })
+)
+
+gulp.task('prepublishOnly', gulp.series('babel'))
+gulp.task('default', gulp.series('static', 'test', 'coveralls'))
