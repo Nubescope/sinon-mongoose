@@ -1,3 +1,4 @@
+'use strict';
 var assert = require('assert');
 var sinon = require('sinon');
 var mongoose = require('mongoose');
@@ -91,7 +92,7 @@ describe('sinon-mongoose', function() {
           bookMock.verify();
           bookMock.restore();
           done(new Error('should fail to bookMock.verify()'));
-        }catch (err){
+        } catch (err){
           bookMock.restore();
           assert.equal(err.message, 'Expected sort([...]) once (never called)');
           done();
@@ -151,12 +152,12 @@ describe('sinon-mongoose', function() {
           bookMock.verify();
           sandbox.restore();
           done(new Error('should fail to bookMock.verify()'));
-        }catch (err){
+        } catch (err){
           sandbox.restore();
           try {
             assert.equal(err.message, 'Expected limit([...]) once (never called)');
             done();
-          }catch (error){
+          } catch (error){
             done(error);
           }
         }
@@ -176,12 +177,12 @@ describe('sinon-mongoose', function() {
           bookMock.verify();
           sandbox.restore();
           done(new Error('should fail to bookMock.verify()'));
-        }catch (err){
+        } catch (err){
           sandbox.restore();
           try {
             assert.equal(err.message, 'Expected limit([...]) once (never called)');
             done();
-          }catch (error){
+          } catch (error){
             done(error);
           }
         }
