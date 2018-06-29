@@ -1,193 +1,262 @@
-'use strict';
-var assert = require('assert');
-var sinon = require('sinon');
-var mongoose = require('mongoose');
-mongoose.Promise = global.Promise;
-require('../lib');
+'use strict'
+var assert = require('assert')
+var sinon = require('sinon')
+var mongoose = require('mongoose')
+mongoose.Promise = global.Promise
+require('../lib')
 
 describe('sinon-mongoose', function() {
   var bookSchema = new mongoose.Schema({
     title: String,
-  });
+  })
 
-  var Book = mongoose.model('Book', bookSchema);
+  var Book = mongoose.model('Book', bookSchema)
 
   describe('should made Mongoose model methods chainables', function() {
     it('#find', function(done) {
-      var BookMock = sinon.mock(Book);
+      var BookMock = sinon.mock(Book)
 
-      BookMock.expects('find').withArgs('SOME_ARGUMENTS').chain('exec').resolves('RESULT');
+      BookMock.expects('find')
+        .withArgs('SOME_ARGUMENTS')
+        .chain('exec')
+        .resolves('RESULT')
 
-      Book.find('SOME_ARGUMENTS').exec().then(function(result) {
-        BookMock.verify();
-        BookMock.restore();
-        assert.equal(result, 'RESULT');
-        done();
-      });
-    });
+      Book.find('SOME_ARGUMENTS')
+        .exec()
+        .then(function(result) {
+          BookMock.verify()
+          BookMock.restore()
+          assert.equal(result, 'RESULT')
+          done()
+        })
+    })
 
     it('#lean', function(done) {
-      var BookMock = sinon.mock(Book);
+      var BookMock = sinon.mock(Book)
 
-      BookMock.expects('find').withArgs('SOME_ARGUMENTS').chain('lean').chain('exec').resolves('RESULT');
+      BookMock.expects('find')
+        .withArgs('SOME_ARGUMENTS')
+        .chain('lean')
+        .chain('exec')
+        .resolves('RESULT')
 
-      Book.find('SOME_ARGUMENTS').lean().exec().then(function(result) {
-        BookMock.verify();
-        BookMock.restore();
-        assert.equal(result, 'RESULT');
-        done();
-      });
-    });
+      Book.find('SOME_ARGUMENTS')
+        .lean()
+        .exec()
+        .then(function(result) {
+          BookMock.verify()
+          BookMock.restore()
+          assert.equal(result, 'RESULT')
+          done()
+        })
+    })
 
     it('#count', function(done) {
-      var BookMock = sinon.mock(Book);
+      var BookMock = sinon.mock(Book)
 
-      BookMock.expects('find').withArgs('SOME_ARGUMENTS').chain('count').chain('exec').resolves('RESULT');
+      BookMock.expects('find')
+        .withArgs('SOME_ARGUMENTS')
+        .chain('count')
+        .chain('exec')
+        .resolves('RESULT')
 
-      Book.find('SOME_ARGUMENTS').count().exec().then(function(result) {
-        BookMock.verify();
-        BookMock.restore();
-        assert.equal(result, 'RESULT');
-        done();
-      });
-    });
+      Book.find('SOME_ARGUMENTS')
+        .count()
+        .exec()
+        .then(function(result) {
+          BookMock.verify()
+          BookMock.restore()
+          assert.equal(result, 'RESULT')
+          done()
+        })
+    })
 
     it('#aggregate', function(done) {
-      var BookMock = sinon.mock(Book);
+      var BookMock = sinon.mock(Book)
 
-      BookMock.expects('aggregate').chain('lookup').resolves('RESULT');
+      BookMock.expects('aggregate')
+        .chain('lookup')
+        .resolves('RESULT')
 
-      Book.aggregate().lookup().then(function(result) {
-        BookMock.verify();
-        BookMock.restore();
-        assert.equal(result, 'RESULT');
-        done();
-      });
-    });
-  });
+      Book.aggregate()
+        .lookup()
+        .then(function(result) {
+          BookMock.verify()
+          BookMock.restore()
+          assert.equal(result, 'RESULT')
+          done()
+        })
+    })
+  })
 
   describe('should made Mongoose document methods chainables', function() {
     it('#update', function(done) {
-      var bookMock = sinon.mock(new Book({ title: 'Rayuela' }));
+      var bookMock = sinon.mock(new Book({ title: 'Rayuela' }))
 
-      bookMock.expects('update').withArgs('SOME_ARGUMENTS').chain('exec').resolves('RESULT');
+      bookMock
+        .expects('update')
+        .withArgs('SOME_ARGUMENTS')
+        .chain('exec')
+        .resolves('RESULT')
 
-      bookMock.object.update('SOME_ARGUMENTS').exec().then(function(result) {
-        bookMock.verify();
-        bookMock.restore();
-        assert.equal(result, 'RESULT');
-        done();
-      });
-    });
+      bookMock.object
+        .update('SOME_ARGUMENTS')
+        .exec()
+        .then(function(result) {
+          bookMock.verify()
+          bookMock.restore()
+          assert.equal(result, 'RESULT')
+          done()
+        })
+    })
 
     it('#verify chained', function(done) {
-      var bookMock = sinon.mock(new Book({ title: 'Rayuela' }));
+      var bookMock = sinon.mock(new Book({ title: 'Rayuela' }))
 
-      bookMock.expects('update')
+      bookMock
+        .expects('update')
         .chain('sort')
-        .chain('exec').resolves('RESULT');
+        .chain('exec')
+        .resolves('RESULT')
 
-      bookMock.object.update('SOME_ARGUMENTS').exec().then(function(result) {// eslint-disable-line
-        try {
-          bookMock.verify();
-          bookMock.restore();
-          done(new Error('should fail to bookMock.verify()'));
-        } catch (err){
-          bookMock.restore();
-          assert.equal(err.message, 'Expected sort([...]) once (never called)');
-          done();
-        }
-      });
-    });
-
-
-  });
+      bookMock.object
+        .update('SOME_ARGUMENTS')
+        .exec()
+        .then(function() {
+          // eslint-disable-line
+          try {
+            bookMock.verify()
+            bookMock.restore()
+            done(new Error('should fail to bookMock.verify()'))
+          } catch (err) {
+            bookMock.restore()
+            assert.equal(
+              err.message,
+              'Expected sort([...]) once (never called)'
+            )
+            done()
+          }
+        })
+    })
+  })
 
   describe('using sinon sandbox', function() {
-    var sandbox = sinon.sandbox.create();
+    var sandbox = sinon.sandbox.create()
 
     afterEach(function() {
-      sandbox.verify();
-      sandbox.restore();
-    });
+      sandbox.verify()
+      sandbox.restore()
+    })
 
     it('should work mocking Model', function() {
-      var BookMock = sandbox.mock(Book);
+      var BookMock = sandbox.mock(Book)
 
-      BookMock.expects('find').withArgs('SOME_ARGUMENTS').chain('exec').resolves('RESULT');
+      BookMock.expects('find')
+        .withArgs('SOME_ARGUMENTS')
+        .chain('exec')
+        .resolves('RESULT')
 
-      Book.find('SOME_ARGUMENTS').exec().then(function(result) {
-        assert.equal(result, 'RESULT');
-      });
-    });
+      Book.find('SOME_ARGUMENTS')
+        .exec()
+        .then(function(result) {
+          assert.equal(result, 'RESULT')
+        })
+    })
 
     it('should work mocking Document', function() {
-      var bookMock = sandbox.mock(new Book({ title: 'Rayuela' }));
+      var bookMock = sandbox.mock(new Book({ title: 'Rayuela' }))
 
-      bookMock.expects('update').withArgs('SOME_ARGUMENTS').chain('exec').resolves('RESULT');
+      bookMock
+        .expects('update')
+        .withArgs('SOME_ARGUMENTS')
+        .chain('exec')
+        .resolves('RESULT')
 
-      bookMock.object.update('SOME_ARGUMENTS').exec().then(function(result) {
-        assert.equal(result, 'RESULT');
-      });
-    });
+      bookMock.object
+        .update('SOME_ARGUMENTS')
+        .exec()
+        .then(function(result) {
+          assert.equal(result, 'RESULT')
+        })
+    })
 
     it('Model should be restored properly', function() {
-      var bookMock = sandbox.mock(Book);
-      bookMock.expects('findOne').never();
-      sandbox.restore();
-      var anotherBookMock = sandbox.mock(Book);
-      anotherBookMock.expects('findOne').never();
-    });
+      var bookMock = sandbox.mock(Book)
+      bookMock.expects('findOne').never()
+      sandbox.restore()
+      var anotherBookMock = sandbox.mock(Book)
+      anotherBookMock.expects('findOne').never()
+    })
 
     it('Verify chained - expectation.never()', function(done) {
-      var bookMock = sandbox.mock(new Book({ title: 'Rayuela' }));
+      var bookMock = sandbox.mock(new Book({ title: 'Rayuela' }))
 
-      bookMock.expects('update')
-        .chain('sort').never()
+      bookMock
+        .expects('update')
+        .chain('sort')
+        .never()
         .chain('limit')
-        .chain('exec').resolves('RESULT');
+        .chain('exec')
+        .resolves('RESULT')
 
-      bookMock.object.update('SOME_ARGUMENTS').exec().then(function(result) {  // eslint-disable-line
-        try {
-          bookMock.verify();
-          sandbox.restore();
-          done(new Error('should fail to bookMock.verify()'));
-        } catch (err){
-          sandbox.restore();
+      bookMock.object
+        .update('SOME_ARGUMENTS')
+        .exec()
+        .then(function() {
+          // eslint-disable-line
           try {
-            assert.equal(err.message, 'Expected limit([...]) once (never called)');
-            done();
-          } catch (error){
-            done(error);
+            bookMock.verify()
+            sandbox.restore()
+            done(new Error('should fail to bookMock.verify()'))
+          } catch (err) {
+            sandbox.restore()
+            try {
+              assert.equal(
+                err.message,
+                'Expected limit([...]) once (never called)'
+              )
+              done()
+            } catch (error) {
+              done(error)
+            }
           }
-        }
-      });
-    });
+        })
+    })
 
     it('Verify chained - expectation withArgs()', function(done) {
-      var bookMock = sandbox.mock(new Book({ title: 'Rayuela' }));
+      var bookMock = sandbox.mock(new Book({ title: 'Rayuela' }))
 
-      bookMock.expects('update')
-        .chain('sort').withArgs({field: 'asc'})
+      bookMock
+        .expects('update')
+        .chain('sort')
+        .withArgs({ field: 'asc' })
         .chain('limit')
-        .chain('exec').resolves('RESULT');
+        .chain('exec')
+        .resolves('RESULT')
 
-      bookMock.object.update('SOME_ARGUMENTS').sort({field: 'asc'}).exec().then(function(result) { // eslint-disable-line
-        try {
-          bookMock.verify();
-          sandbox.restore();
-          done(new Error('should fail to bookMock.verify()'));
-        } catch (err){
-          sandbox.restore();
+      bookMock.object
+        .update('SOME_ARGUMENTS')
+        .sort({ field: 'asc' })
+        .exec()
+        .then(function() {
+          // eslint-disable-line
           try {
-            assert.equal(err.message, 'Expected limit([...]) once (never called)');
-            done();
-          } catch (error){
-            done(error);
+            bookMock.verify()
+            sandbox.restore()
+            done(new Error('should fail to bookMock.verify()'))
+          } catch (err) {
+            sandbox.restore()
+            try {
+              assert.equal(
+                err.message,
+                'Expected limit([...]) once (never called)'
+              )
+              done()
+            } catch (error) {
+              done(error)
+            }
           }
-        }
-      });
-    });
-
-  });
-});
+        })
+    })
+  })
+})

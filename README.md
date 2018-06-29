@@ -1,4 +1,6 @@
+<!-- prettier-ignore-start -->
 # sinon-mongoose [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url] [![Coverage percentage][coveralls-image]][coveralls-url]
+
 > Extend [Sinon][sinon-url] stubs for [Mongoose][mongoose-url] methods to test chained methods easily
 
 ## Installation
@@ -10,33 +12,39 @@ $ npm install sinon-mongoose
 ## Usage
 
 ```js
-require('sinon');
-require('sinon-mongoose');
+require('sinon')
+require('sinon-mongoose')
 ```
+
 ### With Promises
 
 > If you are using a version < 2 of `sinon-mongoose` we recommend you to use [sinon-as-promised][sinon-as-promised-url] to have `resolves` and `rejects` methods on stubs.
 
 If you want to test this
+
 ```js
 MongooseModel.find()
   .limit(10)
   .sort('-date')
   .exec()
   .then(function(result) {
-    console.log(result);
-  });
+    console.log(result)
+  })
 ```
+
 Just `mock` and `expects` as usual and use `chain` to expects the chained methods.
 Finally call `resolves` or `rejects` (remember to require [sinon-as-promised][sinon-as-promised-url]).
 
 ```js
-sinon.mock(MongooseModel)
+sinon
+  .mock(MongooseModel)
   .expects('find')
-  .chain('limit').withArgs(10)
-  .chain('sort').withArgs('-date')
+  .chain('limit')
+  .withArgs(10)
+  .chain('sort')
+  .withArgs('-date')
   .chain('exec')
-  .resolves('SOME_VALUE');
+  .resolves('SOME_VALUE')
 ```
 
 See complete [example][promises-example-url]
@@ -44,37 +52,42 @@ See complete [example][promises-example-url]
 ### With callbacks (no Promises)
 
 If you want to test this
+
 ```js
 MongooseModel.find()
   .limit(10)
   .sort('-date')
   .exec(function(err, result) {
-    console.log(result);
-  });
+    console.log(result)
+  })
 ```
+
 Just `mock` and `expects` as usually and use `chain` to expects the chained methods.
 Finally `yields` as always.
 
 ```js
-sinon.mock(MongooseModel)
+sinon
+  .mock(MongooseModel)
   .expects('find')
-  .chain('limit').withArgs(10)
-  .chain('sort').withArgs('-date')
+  .chain('limit')
+  .withArgs(10)
+  .chain('sort')
+  .withArgs('-date')
   .chain('exec')
-  .yields(null, 'SOME_VALUE');
+  .yields(null, 'SOME_VALUE')
 ```
 
 See complete [example][callbacks-example-url]
 
 ## Contributors
+
 [@jniemin](https://github.com/jniemin)  
 [@joebowbeer](https://github.com/joebowbeer)  
-[@YasharF](https://github.com/YasharF)  
+[@YasharF](https://github.com/YasharF)
 
 ## License
 
 MIT © [Gonzalo Aguirre]()
-
 
 [npm-image]: https://badge.fury.io/js/sinon-mongoose.svg
 [npm-url]: https://npmjs.org/package/sinon-mongoose
@@ -89,3 +102,4 @@ MIT © [Gonzalo Aguirre]()
 [sinon-as-promised-url]: https://github.com/bendrucker/sinon-as-promised
 [promises-example-url]: https://github.com/underscopeio/sinon-mongoose/tree/master/examples/promises
 [callbacks-example-url]: https://github.com/underscopeio/sinon-mongoose/tree/master/examples/callbacks
+<!-- prettier-ignore-end -->

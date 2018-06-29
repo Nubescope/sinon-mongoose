@@ -29,6 +29,7 @@
   "devDependencies": {
     "babel-core": "^5.5.0",
     "del": "^3.0.0",
+    "eslint-config-prettier": "^2.9.0",
     "gulp": "^3.9.1",
     "gulp-babel": "^6.1.2",
     "gulp-coveralls": "^0.1.4",
@@ -38,8 +39,11 @@
     "gulp-mocha": "^5.0.0",
     "gulp-nsp": "^3.0.1",
     "gulp-plumber": "^1.2.0",
+    "husky": "^0.14.3",
     "isparta": "^4.0.0",
     "mongoose": "^4.2.5",
+    "prettier": "1.13.7",
+    "pretty-quick": "^1.6.0",
     "sinon": "2.1 - 4"
   },
   "peerDependencies": {
@@ -47,7 +51,8 @@
   },
   "scripts": {
     "prepublishOnly": "gulp prepublishOnly",
-    "test": "gulp"
+    "test": "gulp",
+    "precommit": "pretty-quick --staged"
   },
   "license": "MIT"
 }

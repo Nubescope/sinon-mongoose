@@ -3,7 +3,7 @@ node_js:
   - v10
   - v8
   - v6
-cache:  
+cache:
   directories:
     - "node_modules"
 sudo: false
