@@ -1,5 +1,5 @@
 <!-- prettier-ignore-start -->
-# sinon-mongoose [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url] [![Coverage percentage][coveralls-image]][coveralls-url]
+# sinon-mongoose [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![devDependency Status][daviddm-image]][daviddm-url] [![Coverage percentage][coveralls-image]][coveralls-url]
 
 > Extend [Sinon][sinon-url] stubs for [Mongoose][mongoose-url] methods to test chained methods easily
 
@@ -93,8 +93,8 @@ MIT © [Gonzalo Aguirre]()
 [npm-url]: https://npmjs.org/package/sinon-mongoose
 [travis-image]: https://travis-ci.org/underscopeio/sinon-mongoose.svg?branch=master
 [travis-url]: https://travis-ci.org/underscopeio/sinon-mongoose
-[daviddm-image]: https://david-dm.org/underscopeio/sinon-mongoose.svg?theme=shields.io
-[daviddm-url]: https://david-dm.org/underscopeio/sinon-mongoose
+[daviddm-image]: https://david-dm.org/underscopeio/sinon-mongoose/dev-status.svg?theme=shields.io
+[daviddm-url]: https://david-dm.org/underscopeio/sinon-mongoose?type=dev
 [coveralls-image]: https://coveralls.io/repos/underscopeio/sinon-mongoose/badge.svg
 [coveralls-url]: https://coveralls.io/r/underscopeio/sinon-mongoose
 [sinon-url]: https://github.com/cjohansen/sinon.js
