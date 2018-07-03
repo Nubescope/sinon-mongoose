@@ -141,15 +141,16 @@ describe('sinon-mongoose', function() {
   })
 
   describe('using sinon sandbox', function() {
-    var sandbox = sinon.sandbox.create()
+    beforeEach(function() {
+      sinon.restore()
+    })
 
     afterEach(function() {
-      sandbox.verify()
-      sandbox.restore()
+      sinon.verify()
     })
 
     it('should work mocking Model', function() {
-      var BookMock = sandbox.mock(Book)
+      var BookMock = sinon.mock(Book)
 
       BookMock.expects('find')
         .withArgs('SOME_ARGUMENTS')
@@ -164,7 +165,7 @@ describe('sinon-mongoose', function() {
     })
 
     it('should work mocking Document', function() {
-      var bookMock = sandbox.mock(new Book({ title: 'Rayuela' }))
+      var bookMock = sinon.mock(new Book({ title: 'Rayuela' }))
 
       bookMock
         .expects('update')
@@ -181,15 +182,15 @@ describe('sinon-mongoose', function() {
     })
 
     it('Model should be restored properly', function() {
-      var bookMock = sandbox.mock(Book)
+      var bookMock = sinon.mock(Book)
       bookMock.expects('findOne').never()
-      sandbox.restore()
-      var anotherBookMock = sandbox.mock(Book)
+      sinon.restore()
+      var anotherBookMock = sinon.mock(Book)
       anotherBookMock.expects('findOne').never()
     })
 
     it('Verify chained - expectation.never()', function(done) {
-      var bookMock = sandbox.mock(new Book({ title: 'Rayuela' }))
+      var bookMock = sinon.mock(new Book({ title: 'Rayuela' }))
 
       bookMock
         .expects('update')
@@ -206,10 +207,10 @@ describe('sinon-mongoose', function() {
           // eslint-disable-line
           try {
             bookMock.verify()
-            sandbox.restore()
+            sinon.restore()
             done(new Error('should fail to bookMock.verify()'))
           } catch (err) {
-            sandbox.restore()
+            sinon.restore()
             try {
               assert.equal(
                 err.message,
@@ -224,7 +225,7 @@ describe('sinon-mongoose', function() {
     })
 
     it('Verify chained - expectation withArgs()', function(done) {
-      var bookMock = sandbox.mock(new Book({ title: 'Rayuela' }))
+      var bookMock = sinon.mock(new Book({ title: 'Rayuela' }))
 
       bookMock
         .expects('update')
@@ -242,10 +243,10 @@ describe('sinon-mongoose', function() {
           // eslint-disable-line
           try {
             bookMock.verify()
-            sandbox.restore()
+            sinon.restore()
             done(new Error('should fail to bookMock.verify()'))
           } catch (err) {
-            sandbox.restore()
+            sinon.restore()
             try {
               assert.equal(
                 err.message,
