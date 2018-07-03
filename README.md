@@ -9,6 +9,9 @@
 $ npm install sinon-mongoose
 ```
 
+> IMPORTANT! As of version **2.2.0** we are supporting sinon >= 5. 
+> If you are using sinon < 5 you could have some problems due to some [breaking changes][sinon-5-breaking-changes] in sinon 5. 
+
 ## Usage
 
 ```js
@@ -102,4 +105,5 @@ MIT © [Gonzalo Aguirre]()
 [sinon-as-promised-url]: https://github.com/bendrucker/sinon-as-promised
 [promises-example-url]: https://github.com/underscopeio/sinon-mongoose/tree/master/examples/promises
 [callbacks-example-url]: https://github.com/underscopeio/sinon-mongoose/tree/master/examples/callbacks
+[sinon-5-breaking-changes]: http://sinonjs.org/guides/migrating-to-5.0
 <!-- prettier-ignore-end -->
