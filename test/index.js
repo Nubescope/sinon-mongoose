@@ -260,4 +260,63 @@ describe('sinon-mongoose', function() {
         })
     })
   })
+
+  describe('Populate method', function() {
+    beforeEach(function() {
+      sinon.restore()
+    })
+
+    afterEach(function() {
+      sinon.verify()
+    })
+
+    it('should work using execPopulate method', function() {
+      var book = new Book({ title: 'Rayuela' })
+      var bookMock = sinon.mock(book)
+
+      bookMock
+        .expects('populate')
+        .withArgs('POPULATE_FIELD')
+        .chain('execPopulate')
+        .resolves('RESULT')
+
+      book
+        .populate('POPULATE_FIELD')
+        .execPopulate()
+        .then(function(result) {
+          assert.equal(result, 'RESULT')
+        })
+    })
+
+    it.skip('should work using populate method more than once', function() {
+      var book = new Book({ title: 'Rayuela' })
+      var bookMock = sinon.mock(book)
+
+      bookMock
+        .expects('populate')
+        .withArgs('author')
+        .chain('populate')
+        .withArgs({
+          path: 'notes',
+          match: /comedy/,
+          select: 'text',
+          model: 'modelName',
+        })
+        .chain('execPopulate')
+        .resolves('RESULT')
+
+      book
+        .populate('author')
+        .populate({
+          path: 'notes',
+          match: /comedy/,
+          select: 'text',
+          model: 'modelName',
+        })
+        .execPopulate()
+        .then(function(result) {
+          assert.equal(result, 'RESULT')
+        })
+    })
+  })
 })
