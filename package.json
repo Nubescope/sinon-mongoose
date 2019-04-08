@@ -28,11 +28,11 @@
   "repository": "underscopeio/sinon-mongoose",
   "devDependencies": {
     "@babel/core": "^7.4.3",
+    "@kollavarsham/gulp-coveralls": "^0.2.5",
     "del": "^4.1.0",
     "eslint-config-prettier": "^4.1.0",
     "gulp": "^4.0.0",
     "gulp-babel": "^8.0.0",
-    "gulp-coveralls": "^0.1.4",
     "gulp-eslint": "^5.0.0",
     "gulp-exclude-gitignore": "^1.2.0",
     "gulp-istanbul": "^1.1.3",
