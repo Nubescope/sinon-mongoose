@@ -50,8 +50,12 @@
   },
   "scripts": {
     "prepublishOnly": "gulp prepublishOnly",
-    "test": "gulp",
-    "precommit": "pretty-quick --staged"
+    "test": "gulp"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --staged"
+    }
+  }
 }
