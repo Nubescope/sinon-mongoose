@@ -5,7 +5,6 @@ var excludeGitignore = require('gulp-exclude-gitignore')
 var mocha = require('gulp-mocha')
 var istanbul = require('gulp-istanbul')
 var plumber = require('gulp-plumber')
-var del = require('del')
 var isparta = require('isparta')
 
 gulp.task('static', function staticTask() {
@@ -47,9 +46,5 @@ gulp.task(
       })
   })
 )
-
-gulp.task('clean', function() {
-  return del('dist')
-})
 
 gulp.task('default', gulp.series('static', 'test'))
