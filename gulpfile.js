@@ -1,12 +1,10 @@
 'use strict'
-var path = require('path')
 var gulp = require('gulp')
 var eslint = require('gulp-eslint')
 var excludeGitignore = require('gulp-exclude-gitignore')
 var mocha = require('gulp-mocha')
 var istanbul = require('gulp-istanbul')
 var plumber = require('gulp-plumber')
-var coveralls = require('@kollavarsham/gulp-coveralls')
 var babel = require('gulp-babel')
 var del = require('del')
 var isparta = require('isparta')
@@ -55,19 +53,6 @@ gulp.task(
   })
 )
 
-gulp.task(
-  'coveralls',
-  gulp.series('test', function coverallsTask() {
-    if (!process.env.CI) {
-      return Promise.resolve()
-    }
-
-    return gulp
-      .src(path.join(__dirname, 'coverage/lcov.info'))
-      .pipe(coveralls())
-  })
-)
-
 gulp.task('clean', function() {
   return del('dist')
 })
@@ -83,4 +68,4 @@ gulp.task(
 )
 
 gulp.task('prepublishOnly', gulp.series('babel'))
-gulp.task('default', gulp.series('static', 'test', 'coveralls'))
+gulp.task('default', gulp.series('static', 'test'))
