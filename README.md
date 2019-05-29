@@ -1,5 +1,5 @@
 <!-- prettier-ignore-start -->
-# sinon-mongoose [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![devDependency Status][daviddm-image]][daviddm-url] [![Coverage percentage][coveralls-image]][coveralls-url]
+# sinon-mongoose [![NPM version][npm-image]][npm-url] [![devDependency Status][daviddm-image]][daviddm-url] [![Coverage percentage][coveralls-image]][coveralls-url]
 
 > Extend [Sinon][sinon-url] stubs for [Mongoose][mongoose-url] methods to test chained methods easily
 
