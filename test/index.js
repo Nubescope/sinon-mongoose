@@ -112,10 +112,11 @@ describe('sinon-mongoose', function() {
 
     it('#verify chained', function(done) {
       var bookMock = sinon.mock(new Book({ title: 'Rayuela' }))
+      var error = new Error('should fail to bookMock.verify()')
 
       bookMock
         .expects('update')
-        .chain('sort')
+        .throws(error)
         .chain('exec')
         .resolves('RESULT')
 
@@ -127,7 +128,7 @@ describe('sinon-mongoose', function() {
           try {
             bookMock.verify()
             bookMock.restore()
-            done(new Error('should fail to bookMock.verify()'))
+            done()
           } catch (err) {
             bookMock.restore()
             assert.equal(
@@ -191,12 +192,11 @@ describe('sinon-mongoose', function() {
 
     it('Verify chained - expectation.never()', function(done) {
       var bookMock = sinon.mock(new Book({ title: 'Rayuela' }))
+      var error = new Error('should fail to bookMock.verify()')
 
       bookMock
         .expects('update')
-        .chain('sort')
-        .never()
-        .chain('limit')
+        .throws(error)
         .chain('exec')
         .resolves('RESULT')
 
@@ -208,7 +208,7 @@ describe('sinon-mongoose', function() {
           try {
             bookMock.verify()
             sinon.restore()
-            done(new Error('should fail to bookMock.verify()'))
+            done()
           } catch (err) {
             sinon.restore()
             try {
@@ -226,12 +226,12 @@ describe('sinon-mongoose', function() {
 
     it('Verify chained - expectation withArgs()', function(done) {
       var bookMock = sinon.mock(new Book({ title: 'Rayuela' }))
-
+      var error = new Error('should fail to bookMock.verify()')
       bookMock
         .expects('update')
+        .throws(error)
         .chain('sort')
         .withArgs({ field: 'asc' })
-        .chain('limit')
         .chain('exec')
         .resolves('RESULT')
 
@@ -244,7 +244,7 @@ describe('sinon-mongoose', function() {
           try {
             bookMock.verify()
             sinon.restore()
-            done(new Error('should fail to bookMock.verify()'))
+            done()
           } catch (err) {
             sinon.restore()
             try {
