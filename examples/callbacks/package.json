@@ -6,7 +6,7 @@
   "devDependencies": {
     "mocha": "^2.0.1",
     "sinon": "^1.12.1",
-    "mongoose": "^4.2.5",
+    "mongoose": "^5.8.4",
     "sinon-mongoose": "^1.2.0"
   }
 }
