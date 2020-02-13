@@ -43,10 +43,10 @@
     "mongoose": "^5.1.7",
     "prettier": "1.16.4",
     "pretty-quick": "^1.10.0",
-    "sinon": "7.3.1"
+    "sinon": "8.1.1"
   },
   "peerDependencies": {
-    "sinon": "5 - 7"
+    "sinon": "5 - 8"
   },
   "scripts": {
     "prepublishOnly": "gulp prepublishOnly",
