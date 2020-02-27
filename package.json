@@ -46,7 +46,7 @@
     "sinon": "8.1.1"
   },
   "peerDependencies": {
-    "sinon": "5 - 8"
+    "sinon": "5 - 9"
   },
   "scripts": {
     "prepublishOnly": "gulp prepublishOnly",
