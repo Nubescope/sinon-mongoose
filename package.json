@@ -50,7 +50,7 @@
     "sinon": "5 - 7"
   },
   "scripts": {
-    "prepublishOnly": "gulp prepublishOnly",
+    "prepare": "gulp build",
     "test": "gulp"
   },
   "license": "MIT",
