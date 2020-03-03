@@ -82,5 +82,5 @@ gulp.task(
   })
 )
 
-gulp.task('prepublishOnly', gulp.series('babel'))
+gulp.task('build', gulp.series('babel'))
 gulp.task('default', gulp.series('static', 'test', 'coveralls'))

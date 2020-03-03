@@ -1,6 +1,6 @@
 {
   "name": "sinon-mongoose",
-  "version": "2.3.0",
+  "version": "2.3.1",
   "description": "Sinon extensions for Mongoose stubs",
   "homepage": "",
   "author": {
@@ -46,10 +46,11 @@
     "sinon": "7.3.1"
   },
   "peerDependencies": {
+    "mongoose": "4 - 5",
     "sinon": "5 - 7"
   },
   "scripts": {
-    "prepublishOnly": "gulp prepublishOnly",
+    "prepare": "gulp build",
     "test": "gulp"
   },
   "license": "MIT",
